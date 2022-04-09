@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:time_tracker_flutter_course/app/sign_in/sign_in_button.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -29,27 +30,11 @@ class SignInPage extends StatelessWidget {
             style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 8.0),
-          _buildSignInBtn('Ola'),
-          const SizedBox(height: 8.0),
-          _buildSignInBtn('Muchacho'),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSignInBtn(String text, {Color bgColor = Colors.white}) {
-    return ElevatedButton(
-      child: Text(text, style: const TextStyle(color: Colors.black87)),
-      onPressed: () => {},
-      style: ButtonStyle(
-        backgroundColor: MaterialStateColor.resolveWith((states) => bgColor),
-        shape: MaterialStateProperty.all(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(4.0),
-            ),
+          SignInButton(
+            text: 'Sign in with Google',
+            onPressed: () {},
           ),
-        ),
+        ],
       ),
     );
   }
