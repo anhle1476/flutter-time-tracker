@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/common_widgets/custom_app_bar.dart';
@@ -8,17 +7,14 @@ import 'package:time_tracker_flutter_course/services/auth.dart';
 class HomePage extends StatelessWidget {
   const HomePage({
     Key? key,
-    required this.onSignOut,
     required this.auth,
   }) : super(key: key);
 
-  final void Function() onSignOut;
   final AuthBase auth;
 
   Future<void> _signOut() async {
     try {
       await auth.signOut();
-      onSignOut();
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());

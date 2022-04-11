@@ -9,7 +9,7 @@ class CustomAppBar extends AppBar {
           key: key,
           title: Text(title),
           elevation: 2.0,
-          centerTitle: actions == null,
+          centerTitle: true,
           actions: actions
         );
 }
