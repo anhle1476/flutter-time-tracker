@@ -22,7 +22,7 @@ class CustomRaisedButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         child: child,
-        onPressed: () => {},
+        onPressed: onPressed,
         style: ButtonStyle(
           backgroundColor:
               MaterialStateColor.resolveWith((states) => backgroundColor),

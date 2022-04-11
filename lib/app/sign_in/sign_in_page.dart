@@ -1,18 +1,37 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/sign_in_button.dart';
+import 'package:time_tracker_flutter_course/common_widgets/custom_app_bar.dart';
+import 'package:time_tracker_flutter_course/common_widgets/white_space.dart';
+import 'package:time_tracker_flutter_course/services/auth.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({
+    Key? key,
+    required this.onSignIn,
+    required this.auth,
+  }) : super(key: key);
+
+  final void Function(User?) onSignIn;
+  final AuthBase auth;
+
+  Future<void> _signInAnonymously() async {
+    try {
+      final user = await auth.signInAnonymously();
+      onSignIn(user);
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        title: const Text("Time Tracker"),
-        centerTitle: true,
-        elevation: 2.00,
-      ),
+      appBar: CustomAppBar(),
       body: _buildContent(),
     );
   }
@@ -29,10 +48,39 @@ class SignInPage extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w600),
           ),
-          const SizedBox(height: 8.0),
+          const VerticalWhiteSpace(size: WhiteSpaceSize.extraLarge),
           SignInButton(
             text: 'Sign in with Google',
             onPressed: () {},
+            image: 'images/google-logo.png',
+          ),
+          const VerticalWhiteSpace(),
+          SignInButton(
+            text: 'Sign in with Facebook',
+            textColor: Colors.white,
+            backgroundColor: const Color(0xFF334D92),
+            onPressed: () {},
+            image: 'images/facebook-logo.png',
+          ),
+          const VerticalWhiteSpace(),
+          SignInButton(
+            text: 'Sign in with email',
+            textColor: Colors.white,
+            backgroundColor: Colors.teal[700] ?? Colors.teal,
+            onPressed: () {},
+          ),
+          const VerticalWhiteSpace(),
+          const Text(
+            'or',
+            style: TextStyle(fontSize: 14.0, color: Colors.black87),
+            textAlign: TextAlign.center,
+          ),
+          const VerticalWhiteSpace(),
+          SignInButton(
+            text: 'Go anonymous',
+            textColor: Colors.black87,
+            backgroundColor: Colors.lime[300] ?? Colors.lime,
+            onPressed: _signInAnonymously,
           ),
         ],
       ),
